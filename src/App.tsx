@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import './App.css'
+import type { Todo } from './types/todo'
 
 function App() {
-  const [todos, setTodos] = useState([])
-  const [inputValue, setInputValue] = useState('')
+  const [todos, setTodos] = useState<Todo[]>([])
+  const [inputValue, setInputValue] = useState<string>('')
 
-  const addTodo = () => {
+  const addTodo = (): void => {
     if (inputValue.trim() !== '') {
       setTodos([
         ...todos,
@@ -19,7 +20,7 @@ function App() {
     }
   }
 
-  const toggleTodo = (id) => {
+  const toggleTodo = (id: number): void => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -27,11 +28,11 @@ function App() {
     )
   }
 
-  const deleteTodo = (id) => {
+  const deleteTodo = (id: number): void => {
     setTodos(todos.filter((todo) => todo.id !== id))
   }
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter') {
       addTodo()
     }
